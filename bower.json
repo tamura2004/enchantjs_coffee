@@ -1,0 +1,8 @@
+{
+  "name": "yoman",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "enchant.js-builds": "~0.8.2"
+  }
+}

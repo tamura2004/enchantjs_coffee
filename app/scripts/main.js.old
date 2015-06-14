@@ -1,0 +1,50 @@
+enchant();
+
+window.onload = function(){
+	var game = new Core(320,320);
+	game.preload("images/delta.png");
+	game.onload = function(){
+
+		var Bear = Class.create(Sprite, {
+			initialize: function(x,y){
+				Sprite.call(this,16,16);
+				this.x = x;
+				this.y = y;
+				this.image = game.assets["images/delta.png"];
+
+				this.size = rand(100)/100;
+				this.opacity = this.size;
+				this.scale(this.size, this.size);
+
+				this.direction = rand(360);
+				this.speed = this.size * 10;
+				this.rotate(this.direction);
+
+				this.on("enterframe",function(){
+					this.x += Math.cos(this.direction*Math.PI/180)*this.speed;
+					this.y += Math.sin(this.direction*Math.PI/180)*this.speed;
+					if(this.x < 0) this.x = 320;
+					if(this.y < 0) this.y = 320;
+					if(this.x > 320) this.x = 0;
+					if(this.y > 320) this.y = 0;
+				});
+
+				game.rootScene.addChild(this);
+			}
+		});
+
+		var bears = [];
+		for(var i = 0; i< 200; i++){
+			bears[i] = new Bear(rand(320),rand(320))
+		}
+
+
+	};
+
+	game.start();
+
+};
+
+function rand(n){
+	return Math.floor(Math.random()*n + 1)
+}
